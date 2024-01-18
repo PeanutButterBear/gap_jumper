@@ -1,75 +1,60 @@
-/* Bouncing Ball Lab
-   There are two versions of this lab:
-   1) Friendly version. More helper code is provided in lab template.
-   2) More challenging version. Less helper code is provided.
-   
-   This is the more challenging version. 
-   See the friendly version if you need more help.
-   
-   Complete the code as indicated by the comments.
-   The ball moves in a diagonal direction and bounces when
-   it collides with any of the four sides of the screen.
-*/
+//declare global variables
+Sprite ball;
+float move_speed;
 
-PImage ball;
-float center_x, center_y;
-float change_x, change_y;
-float radius;
-
+//initialize global variables
 void setup(){
   size(800,600);
   imageMode(CENTER); // position of image is its center
-  
-  // load ball image "ball.png"
-  ball = loadImage("data/ball.png");
-  
-  // initialize position, velocity and radius of ball.
-  center_x = 400;
-  center_y = 300;
-  change_x = 5;
-  change_y = 5;
-  radius = 64;
-
-
+  move_speed = 3;
+  ball = new Sprite("data/ball.png", 1.0);
 }
 
 void draw(){
   background(255);
   
-  // draw image by calling image(image_variable, x, y, width, height)
-  image(ball, center_x, center_y, 128, 128);
-  
-  // update ball by adding its velocity to its position
-  center_x += change_x;
-  center_y += change_y;
-  
-  /* if ball passes right side of screen, fix center_x to 
-     align the ball exactly at the right side of the screen. 
-     Then negate change_x to change direction. 
-     
-     else if ball passes left side of screen, fix center_x to 
-     align the ball exactly at the left side of the screen. 
-     Then negate change_x to change direction.
-     
-     There should be four conditional: 
-     if and else if for horizontal direction
-     if and else if for vertical direction
-  */
+  ball.display();
+  ball.update();
 
-  
-  // add in code for the else if conditional
-  if (center_x > 800 - 64) {
-    change_x *= -1;
-  } else if (center_x < 64) {
-    change_x *= -1;
+  //draw sprite, move by wasd
+  ball.display();
+  if(keyPressed) {
+    ball.update();
+  } else {
+    keyReleased();
   }
-  
-  
-  // now add if and else if for vertical direction(center_y, change_y)
-  if (center_y > 600 - 64) {
-    change_y *= -1;
-  } else if (center_y < 64) {
-    change_y *= -1;
-  }
+}
 
+//native processing method that detects keystrokes
+void keyPressed(){
+  if(key == 'w') {
+    ball.change_y = move_speed;
+  }
+  if(key == 'a') {
+    ball.change_x = -move_speed;
+  }
+  if(key == 's') {
+    ball.change_y = -move_speed;
+  }
+  if(key == 'd') {
+    ball.change_x = move_speed;
+  }
+}
+
+void keyReleased(){
+  //I think this commented out code is better/more efficient but not sure yet
+  //ball.change_x = 0;
+  //ball.change_y = 0;
+  if(key == 'w') {
+    ball.change_y = 0;
+  }
+  if(key == 'a') {
+    ball.change_x = 0;
+  }
+  if(key == 's') {
+    ball.change_y = 0;
+  }
+  if(key == 'd') {
+    ball.change_x = 0;
+  }
 }
