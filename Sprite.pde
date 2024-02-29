@@ -22,8 +22,9 @@ public class Sprite {
         image(img, center_x, center_y, w, h);
     }
 
-    public void update() {
+    // Is change name to move ok?
+    public void move() {
         center_x += change_x;
         center_y -= change_y; //down is positive direction for y axis in processing so I inverted this as a preference
     }
-}
+} 
