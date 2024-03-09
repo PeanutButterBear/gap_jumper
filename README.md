@@ -6,7 +6,7 @@ to standardize objects for collision detection
 
 to do
 
-    Get Printing again 
+3/8    Get Printing again 
     
 X   Add collision/hit detection
 
