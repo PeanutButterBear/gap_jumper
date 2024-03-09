@@ -1,3 +1,3 @@
-public interface SolidCheck {
+public interface solid_check {
     
 }
