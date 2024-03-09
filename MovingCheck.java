@@ -1,3 +1,3 @@
-public interface MovingCheck {
+public interface moving_check {
     
 }
