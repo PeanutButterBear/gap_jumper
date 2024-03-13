@@ -2,7 +2,7 @@
 // Same as sprite
 
 
-public class Hero implements game_object {
+public class Hero implements game_obj {
     PImage img;
     float center_x, center_y;
     float change_x, change_y;
@@ -28,7 +28,7 @@ public class Hero implements game_object {
         this(filename, scale, 100, 500);
     }
   
-    // 
+    // 3
     public void display() {
         image(img, center_x, center_y, w, h);
     }
@@ -39,6 +39,15 @@ public class Hero implements game_object {
         center_y -= change_y; //down is positive direction for y axis in processing so I inverted this as a preference
     }
     
+    @Override
+    public boolean solid_check() {
+        return true;
+    }
+
+    @Override
+    public boolean danger_check() {
+        return false;
+    }
 }
 
     

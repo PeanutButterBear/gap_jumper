@@ -1,7 +1,7 @@
 // Used for making characters rn
 
 
-public class Sprite implements game_object {
+public class Sprite {
     PImage img;
     float center_x, center_y;
     float change_x, change_y;

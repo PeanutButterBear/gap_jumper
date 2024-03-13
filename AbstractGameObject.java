@@ -1,3 +1,1 @@
-abstract class AbstractGameObject {
-    
-}
+abstract class AbstractGameObject {}
