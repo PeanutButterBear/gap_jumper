@@ -1,5 +1,6 @@
 // Used for making characters rn
-
+// Used for making characters rn
+import java.util.*;
 
 public class Sprite implements game_obj {
     PImage img;
@@ -7,6 +8,9 @@ public class Sprite implements game_obj {
     float change_x, change_y;
     float w, h;
     float hitbox_x, hitbox_y, hitbox_w, hitbox_h;
+    boolean danger;
+    boolean solid;
+    List<game_obj> game_objs = new ArrayList<>();
     
     // Using filename instead of previous "data/example.png")
     // Can make multiple in program runner with ("data/example.png", scale, center_x, center_y)
@@ -23,6 +27,8 @@ public class Sprite implements game_obj {
         hitbox_y = center_y - h/2;
         hitbox_w = w;
         hitbox_h = h;
+        
+        game_objs.add(this);
     }
 
     public Sprite(String filename, float scale, float center_x, float center_y, boolean danger, boolean solid) {
@@ -40,10 +46,13 @@ public class Sprite implements game_obj {
         hitbox_y = center_y - h/2;
         hitbox_w = w;
         hitbox_h = h;
+        
+        game_objs.add(this);
     }
 
     public Sprite(String filename, float scale) {
         this(filename, scale, 0, 0);
+        game_objs.add(this);
     }
 
     public void display() {
@@ -58,28 +67,52 @@ public class Sprite implements game_obj {
         hitbox_y = center_y - h/2;
     }
 
-    public void displayHitbox() {
+    public void showHitbox() {
         noFill();
-        stroke(red);
+        stroke(255,0,0);
         rect(hitbox_x, hitbox_y, hitbox_w, hitbox_h);
+        
     }
 
     @Override
-    public boolean solid_check(){
-        return true;
+    public void solid_check(){
+        solid = true;
     }
 
     @Override
-    public boolean danger_check() { 
-        return true;
+    public void danger_check() { 
+        danger = true;
+    }
+    
+    @Override
+    public boolean hitDetect(game_obj obj) {
+        Hitbox sprite_hitbox = new Hitbox(this.hitbox_x, this.hitbox_y, this.hitbox_w, this.hitbox_h);
+        Hitbox obj_hitbox = new Hitbox(obj.getHitboxX(),obj.getHitboxY(),obj.getHitboxW(),obj.getHitboxH());
+        return sprite_hitbox.intersects(obj_hitbox);
+    }
+    
+    public float getHitboxX() {
+        return hitbox_x;
     }
 
+    public float getHitboxY() {
+        return hitbox_y;
+    }
+
+    public float getHitboxW() {
+        return hitbox_w;
+    }
+
+    public float getHitboxH() {
+        return hitbox_h;
+    }
+    
     // Sets for changing 
-    public set solid_check(boolean solid){
+    public void solid_check(boolean solid){
         this.solid = solid;
     }
 
-    public set danger_check(boolean danger){
+    public void danger_check(boolean danger){
         this.danger = danger;
     }
 }

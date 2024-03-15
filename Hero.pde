@@ -8,7 +8,8 @@ public class Hero implements game_obj {
     float change_x, change_y;
     float w, h;
     float hitbox_x, hitbox_y, hitbox_w, hitbox_h;
-
+    boolean solid,danger;
+    
     // Using filename instead of previous "data/example.png")
     // 
     public Hero(String filename, float scale, float x, float y) {
@@ -19,11 +20,12 @@ public class Hero implements game_obj {
         this.center_y = y;
         change_x = 0;
         change_y = 0;
-
-        hitbox_x = center_x - w / 2;
-        hitbox_y = center_y - h / 2;
-        hitbox_w = w;
-        hitbox_h = h;
+        
+        this.hitbox_x = center_x - w / 2;
+        this.hitbox_y = center_y - h / 2;
+        this.hitbox_w = w;
+        this.hitbox_h = h;
+        game_objs.add(this);
     }
 
     // DEFAULT SPAWN LOCATION IF USING ONLY FILENAME/SCALE
@@ -44,22 +46,55 @@ public class Hero implements game_obj {
         hitbox_x = center_x - w / 2;
         hitbox_y = center_y - h / 2;
     }
-    
+
     public void showHitbox() {
         noFill();
-        stroke(green);
+        stroke(0,255,0);
         rect(hitbox_x, hitbox_y, hitbox_w, hitbox_h);
+         
+        hitbox_x = center_x - w / 2;
+        hitbox_y = center_y - h / 2;
+        hitbox_w = w;
+        hitbox_h = h;
+
+        Hitbox hero_hitbox = new Hitbox(hitbox_x, hitbox_y, hitbox_w, hitbox_h);
     }
 
     @Override
-    public boolean solid_check() {
-        return true;
+    public void solid_check() {
+        solid = true;
     }
 
     @Override
-    public boolean danger_check() {
-        return false;
+    public void danger_check() {
+        danger = false;
     }
+    
+    @Override
+    public boolean hitDetect(game_obj obj) {
+        Hitbox hero_hitbox = new Hitbox(this.hitbox_x, this.hitbox_y, this.hitbox_w, this.hitbox_h);
+        Hitbox obj_hitbox = new Hitbox(obj.getHitboxX(), obj.getHitboxY(), obj.getHitboxW(), obj.getHitboxH());
+        return hero_hitbox.intersects(obj_hitbox);
+    }
+    
+    public float getHitboxX() {
+        return hitbox_x;
+    }
+
+    public float getHitboxY() {
+        return hitbox_y;
+    }
+
+    public float getHitboxW() {
+        return hitbox_w;
+    }
+
+    public float getHitboxH() {
+        return hitbox_h;
+    }
+    
 }
+
+
 
     
