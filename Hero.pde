@@ -13,7 +13,7 @@ public class Hero implements game_obj {
     // Using filename instead of previous "data/example.png")
     // 
     public Hero(String filename, float scale, float x, float y) {
-        img = loadImage("data/copyright_wizard.png");
+        img = loadImage("data/cooler_copyright_wizard.png");
         w = img.width * scale;
         h = img.height * scale;
         this.center_x = x;

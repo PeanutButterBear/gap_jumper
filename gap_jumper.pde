@@ -9,6 +9,7 @@ static int levelCtr = 0;
 String test = "this is a test";
 
 // LIST OF GAME OBJECTS
+// want to move add to the constructors
 List<game_obj> game_objs = new ArrayList<>();
 // GAME OBJECTS
 Sprite ball;
@@ -38,7 +39,7 @@ void setup(){
   
   // filename,scale,x_spawn, y_spawn
   ball = new Sprite("data/ball.png", 1.0, 1500, 800);
-  hero = new Hero("data/copyright_wizard.png", .15, 100 , 600);
+  hero = new Hero("data/cooler_copyright_wizard.png", .15, 100 , 600);
   ground = new Platform("data/ground.png", 3.0, 800, 1200);
   house = new Platform("data/house.png", 1.5, 200, 840);
   
